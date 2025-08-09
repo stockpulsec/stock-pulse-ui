@@ -1,1 +1,0 @@
-After running rename_directory.sh, you can remove the old component folder with: rm -rf src/app/components/stock-alert

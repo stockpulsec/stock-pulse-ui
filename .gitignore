@@ -1,16 +1,14 @@
-# See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
-
-# Compiled output
-/dist
-/tmp
-/out-tsc
-/bazel-out
-
 # Node
 /node_modules
 npm-debug.log
 yarn-error.log
 package-lock.json
+
+# Build outputs
+/dist
+/tmp
+/out-tsc
+/bazel-out
 
 # IDEs and editors
 .idea/
@@ -33,6 +31,12 @@ package-lock.json
 /libpeerconnection.log
 testem.log
 /typings
+
+# Temporary files
+*.tmp
+*.temp
+cleanup.txt
+rename_directory.sh
 
 # System files
 .DS_Store
