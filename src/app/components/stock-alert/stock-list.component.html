@@ -1,0 +1,67 @@
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title text-center mb-4">Stock List</h2>
+                    <div class="mb-3">
+                        <input type="text" class="form-control" placeholder="Search stock ticker..." [(ngModel)]="searchTerm">
+                    </div>
+                    <ul class="list-group mb-3">
+                        <li *ngFor="let stock of filteredStocks()" class="list-group-item d-flex justify-content-between align-items-center">
+                            <span>
+                                <strong>{{ stock.ticker }}</strong> - {{ stock.name }}
+                            </span>
+                            <span>
+                                ${{ stock.price }}
+                                <button class="btn btn-sm btn-success ms-3" (click)="addToGroup(stock)">Add</button>
+                            </span>
+                        </li>
+                    </ul>
+
+                    <!-- Group Dialog -->
+                    <div *ngIf="showGroupDialog" class="modal show d-block" tabindex="-1" style="background: rgba(0,0,0,0.3);">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Add to Group</h5>
+                                    <button type="button" class="btn-close" (click)="closeGroupDialog()"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div *ngIf="groups.length > 0">
+                                        <label>Select Group:</label>
+                                        <select class="form-select mb-2" [(ngModel)]="selectedGroupName">
+                                <option *ngFor="let group of groups" [value]="group.name">{{ group.name }}</option>
+                              </select>
+                                        <div class="text-center mb-2">or</div>
+                                    </div>
+                                    <label>Create New Group:</label>
+                                    <input type="text" class="form-control" [(ngModel)]="newGroupName" placeholder="Group name">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" (click)="closeGroupDialog()">Cancel</button>
+                                    <button type="button" class="btn btn-primary" (click)="confirmAddToGroup()" [disabled]="!selectedGroupName && !newGroupName.trim()">Add</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div *ngIf="groups.length === 0" class="text-muted">No groups created yet.</div>
+                    <div *ngFor="let group of groups" class="mb-3">
+                        <div class="fw-bold">{{ group.name }}</div>
+                        <ul class="list-group">
+                            <li *ngFor="let stock of group.stocks" class="list-group-item d-flex justify-content-between align-items-center">
+                                <span>
+                            <strong>{{ stock.ticker }}</strong> - {{ stock.name }}
+                          </span>
+                                <span>
+                            ${{ stock.price }}
+                          </span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

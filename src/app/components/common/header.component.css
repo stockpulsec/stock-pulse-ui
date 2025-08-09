@@ -1,0 +1,99 @@
+.header {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    width: 100%;
+}
+
+.universal-header-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.universal-header {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 60px;
+    padding: 0 15px;
+    /* Reduced side padding for better alignment */
+    position: relative;
+}
+
+.header-side-section {
+    width: 80px;
+    /* Fixed width for side sections to balance layout */
+    flex-shrink: 0;
+    height: 60px;
+    display: flex;
+    align-items: center;
+}
+
+
+/* Special style for the right side section */
+
+.header-side-section:last-child {
+    padding-right: 10px;
+    /* Add padding to move the profile icon to the right */
+    justify-content: flex-end;
+    /* Ensure alignment to the far right */
+}
+
+
+/* Center section with app title */
+
+.header-center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+}
+
+.app-title {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    white-space: nowrap;
+    letter-spacing: 0.5px;
+}
+
+.profile-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    transition: transform 0.2s ease;
+    margin-right: 0;
+    /* Remove any margin */
+    position: relative;
+    /* Enable position adjustments */
+    right: -5px;
+    /* Slight adjustment to the right */
+}
+
+.profile-icon:hover {
+    transform: scale(1.1);
+}
+
+.dropdown-menu {
+    margin-top: 8px;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    border: none;
+}
+
+.dropdown-item {
+    padding: 8px 16px;
+}
+
+.dropdown-item:active {
+    background-color: var(--bs-primary);
+}

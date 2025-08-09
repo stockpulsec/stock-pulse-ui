@@ -1,0 +1,21 @@
+<div class="login-container">
+    <h2>Login</h2>
+    <form (ngSubmit)="login()" #loginForm="ngForm">
+        <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input id="username" name="username" type="text" class="form-control" [(ngModel)]="username" required />
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input id="password" name="password" type="password" class="form-control" [(ngModel)]="password" required />
+        </div>
+        <div *ngIf="error" class="alert alert-danger">
+            {{ error }}
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="!loginForm.form.valid">Login</button>
+    </form>
+    <div class="mt-3 d-flex justify-content-between">
+        <a routerLink="/signup" class="link-secondary">Sign up</a>
+        <a routerLink="/forgot-password" class="link-primary">Forgot password?</a>
+    </div>
+</div>
