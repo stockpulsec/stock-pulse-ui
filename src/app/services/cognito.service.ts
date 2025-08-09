@@ -78,6 +78,24 @@ export class CognitoService {
     });
   }
 
+  resendConfirmationCode(username: string): Observable<any> {
+    const cognitoUser = new CognitoUser({
+      Username: username,
+      Pool: this.userPool
+    });
+
+    return new Observable(observer => {
+      cognitoUser.resendConfirmationCode((err: any, result: any) => {
+        if (err) {
+          observer.error(err);
+          return;
+        }
+        observer.next(result);
+        observer.complete();
+      });
+    });
+  }
+
   signIn(username: string, password: string): Observable<any> {
     const authenticationData = {
       Username: username,
@@ -95,11 +113,22 @@ export class CognitoService {
     return new Observable(observer => {
       cognitoUser.authenticateUser(authenticationDetails, {
         onSuccess: (session) => {
-          observer.next(session);
+          observer.next({ success: true, session });
           observer.complete();
         },
         onFailure: (err) => {
-          observer.error(err);
+          // Check if user is unverified
+          if (err.code === 'UserNotConfirmedException') {
+            observer.next({ 
+              success: false, 
+              requiresVerification: true, 
+              username: username,
+              message: 'Account not verified. Please check your email for verification code.'
+            });
+            observer.complete();
+          } else {
+            observer.error(err);
+          }
         }
       });
     });

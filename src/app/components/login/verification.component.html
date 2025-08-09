@@ -20,6 +20,14 @@
                 {{ isLoading ? 'Verifying...' : 'Verify Account' }}
               </button>
                         </div>
+                        <div class="text-center mt-3">
+                            <button type="button" class="btn btn-link" (click)="resendCode()" [disabled]="isResending">
+                                {{ isResending ? 'Resending...' : 'Resend Verification Code' }}
+                            </button>
+                        </div>
+                        <div *ngIf="successMessage" class="alert alert-success mt-3">
+                            {{ successMessage }}
+                        </div>
                         <div *ngIf="errorMessage" class="alert alert-danger mt-3">
                             {{ errorMessage }}
                         </div>

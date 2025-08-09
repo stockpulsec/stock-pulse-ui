@@ -14,7 +14,9 @@ import { CognitoService } from '../../services/cognito.service';
 export class VerificationComponent implements OnInit {
   verificationForm: FormGroup;
   isLoading = false;
+  isResending = false;
   errorMessage = '';
+  successMessage = '';
   username = '';
 
   constructor(
@@ -52,6 +54,25 @@ export class VerificationComponent implements OnInit {
         error: (error: any) => {
           this.errorMessage = error.message || 'Verification failed. Please try again.';
           this.isLoading = false;
+        }
+      });
+    }
+  }
+
+  resendCode() {
+    if (!this.isResending && this.username) {
+      this.isResending = true;
+      this.errorMessage = '';
+      this.successMessage = '';
+
+      this.cognitoService.resendConfirmationCode(this.username).subscribe({
+        next: () => {
+          this.successMessage = 'Verification code has been resent to your email.';
+          this.isResending = false;
+        },
+        error: (error: any) => {
+          this.errorMessage = error.message || 'Failed to resend verification code.';
+          this.isResending = false;
         }
       });
     }

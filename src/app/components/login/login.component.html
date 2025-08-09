@@ -9,6 +9,9 @@
             <label for="password" class="form-label">Password</label>
             <input id="password" name="password" type="password" class="form-control" [(ngModel)]="password" required />
         </div>
+        <div *ngIf="successMessage" class="alert alert-success">
+            {{ successMessage }}
+        </div>
         <div *ngIf="error" class="alert alert-danger">
             {{ error }}
         </div>
